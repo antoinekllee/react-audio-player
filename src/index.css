@@ -5,9 +5,101 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #212121;
+  color: #ffffff;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.App .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 75%; /* Added this line to set the width */
+  max-width: 1000px; /* Added this line to set a maximum width */
+}
+
+.App .card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.App img {
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  width: 350px;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  margin: 1rem 0;
+  background-color: #333333;
+  border-radius: 12px;
+  height: 8px;
+  width: 60%;
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.App button {
+  background-color: #333333;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 0.75rem;
+  margin: 0 0.5rem 0 0; /* Updated the margin to add padding between buttons */
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App .button-group {
+  display: flex; /* Added this style to align buttons horizontally */
+  justify-content: center; /* Added this style to center the buttons */
+}
+
+.App button:hover {
+  background-color: #4caf50;
+}
+
+.App .card h1 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
