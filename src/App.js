@@ -1,77 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import './App.css';
+import AudioPlayer from './components/AudioPlayer'; // Import AudioPlayer component
+
+const data = [
+  {
+    title: "Illusions",
+    audioPath: "/assets/music/Illusions.mp3",
+    imagePath: "/assets/music/IllusionsCover.jpg"
+  },
+  {
+    title: "Never Surrender",
+    audioPath: "/assets/music/NeverSurrender.mp3",
+    imagePath: "/assets/music/NeverSurrenderCover.png"
+  },
+  {
+    title: "Soulicious",
+    audioPath: "/assets/music/Soulicious.mp3",
+    imagePath: "/assets/music/SouliciousCover.jpg"
+  }
+]
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [trackProgress, setTrackProgress] = useState(0);
-  const [trackDuration, setTrackDuration] = useState(0);
-
-  const audioRef = useRef(new Audio(process.env.PUBLIC_URL + '/assets/Music.wav'));
-  const intervalRef = useRef();
-
-  useEffect(() => {
-    const audio = audioRef.current;
-
-    audio.addEventListener('loadedmetadata', () => {
-      setTrackDuration(audio.duration);
-    });
-
-    return () => {
-      audio.removeEventListener('loadedmetadata', () => {});
-    };
-  }, []);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-
-    if (isPlaying) {
-      audio.play();
-      intervalRef.current = setInterval(() => {
-        setTrackProgress(audio.currentTime);
-      }, 1000);
-    } else {
-      audio.pause();
-      clearInterval(intervalRef.current);
-    }
-
-    return () => {
-      clearInterval(intervalRef.current);
-    };
-  }, [isPlaying]);
-
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleRestart = () => {
-    audioRef.current.currentTime = 0;
-    setTrackProgress(0);
-  };
-
-  const handleSliderChange = (event) => {
-    const newValue = parseFloat(event.target.value);
-    audioRef.current.currentTime = newValue;
-    setTrackProgress(newValue);
-  };
-
   return (
     <div className="App">
-      <div className="card">
-        <h1>Archesis Theme</h1>
-        <img src={process.env.PUBLIC_URL + '/assets/Cover.png'} alt="Track cover" />
-        <input
-          type="range"
-          min="0"
-          max={trackDuration}
-          step="0.01"
-          value={trackProgress}
-          onChange={handleSliderChange}
+      {/* <AudioPlayer title="Illusions" audioPath="/assets/music/Illusions.wav" imagePath="/assets/music/IllusionsCover.jpg" /> */}
+
+      {data.map((track, index) => (
+        <AudioPlayer
+          key={index}
+          title={track.title}
+          audioPath={track.audioPath}
+          imagePath={track.imagePath}
         />
-        <div className="button-group"> {/* Add the "button-group" class */}
-          <button onClick={handleRestart}>R</button>
-          <button onClick={handlePlayPause}>{isPlaying ? '❚❚' : '▶'}</button>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
